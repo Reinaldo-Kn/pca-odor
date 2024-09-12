@@ -6,6 +6,7 @@ current_version=$(cat VERSION)
 IFS='.' read -r major minor patch <<< "$current_version"
 
 patch=$((patch+1))
+
 new_version="$major.$minor.$patch"
 
 #atualiza o arquivo VERSION
