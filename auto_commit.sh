@@ -8,7 +8,8 @@ IFS='.' read -r major minor patch <<< "$current_version"
 patch=$((patch+1))
 new_version="$major.$minor.$patch"
 
-echo "$new_version" > VERSION
+#atualiza o arquivo VERSION
+echo $new_version > VERSION
 
 # commit automatico 
 git add .
