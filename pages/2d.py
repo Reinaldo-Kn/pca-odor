@@ -5,9 +5,15 @@ from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
 from dash import dcc, html
 import dash
+import dash_bootstrap_components as dbc
+from dash_bootstrap_templates import load_figure_template
+
+
 
 # Inicialize o app
 dash.register_page(__name__, path="/fig2d", name="PCA em 2D")
+
+load_figure_template(["yeti","yeti_dark"])
 
 # Carregar e preparar os dados
 df = pd.read_csv('./dataset/All.csv')
@@ -33,7 +39,8 @@ fig = px.scatter(
     x=principalComponents_odor[:, 0], 
     y=principalComponents_odor[:, 1], 
     color=odor_dataset['Sampe/Class'],
-    title=f'PCA Variância total: {total_var:.2f}%'
+    title=f'PCA Variância total: {total_var:.2f}%',
+    
 )
 
 for i, feature in enumerate(features):
