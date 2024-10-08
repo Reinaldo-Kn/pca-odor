@@ -16,10 +16,10 @@ dash.register_page(__name__, path="/fig2d", name="PCA em 2D")
 load_figure_template(["yeti","yeti_dark"])
 
 # Carregar e preparar os dados
-df = pd.read_csv('./dataset/All.csv')
+df = pd.read_csv('./dataset/All_adjust.csv')
 df = df.loc[:, ~df.columns.str.contains('^Unnamed')]
 
-features = df.columns[4:-1]
+features = df.columns[:-1]
 features_data = df[features]
 
 features_label = df.iloc[:, -1]
@@ -38,7 +38,7 @@ total_var = pca_odor.explained_variance_ratio_.sum() * 100
 fig = px.scatter(
     x=principalComponents_odor[:, 0], 
     y=principalComponents_odor[:, 1], 
-    color=odor_dataset['Sampe/Class'],
+    color=odor_dataset['Class'],
     title=f'PCA Variância total: {total_var:.2f}%',
     
 )

@@ -12,12 +12,12 @@ dash.register_page(__name__,path="/fig3d",name="PCA em 3D")
 
 
 
-df = pd.read_csv('./dataset/All.csv')
+df = pd.read_csv('./dataset/All_adjust.csv')
 #if the column is unnamed, it will be removed
 df = df.loc[:, ~df.columns.str.contains('^Unnamed')]
 
 #padronizando os dados
-features = df.columns[4:-1]
+features = df.columns[:-1]
 features_data = df[features]
 
 features_label = df.iloc[:,-1]
@@ -35,7 +35,7 @@ fig = px.scatter_3d(
     x=principalComponents_odor[:,0], 
     y=principalComponents_odor[:,1],
     z=principalComponents_odor[:,2],
-    color=odor_dataset['Sampe/Class'],
+    color=odor_dataset['Class'],
     title=f'PCA Variância total: {total_var:.2f}%',
     labels={'0': 'Principal Component 1', '1': 'Principal Component 2', '2': 'Principal Component 3'}
 )
