@@ -5,7 +5,7 @@ from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
 
 
-df = pd.read_csv('./dataset/All.csv')
+df = pd.read_csv('./dataset/All_adjust.csv')
 #if the column is unnamed, it will be removed
 df = df.loc[:, ~df.columns.str.contains('^Unnamed')]
 
@@ -22,6 +22,15 @@ x = StandardScaler().fit_transform(x)
 pca_odor = PCA(n_components=2)
 principalComponents_odor = pca_odor.fit_transform(x)
 
+pca_df = pd.DataFrame(data=principalComponents_odor, columns=['PC1', 'PC2'])
+
+# Adicionar a classe ao DataFrame
+pca_df['Class'] = odor_dataset['Class'].values
+
+# Exportar para um arquivo .csv
+pca_df.to_csv('pca_result_alho.csv', index=False)
+
+
 loadings = pca_odor.components_.T * np.sqrt(pca_odor.explained_variance_)
 
 total_var = pca_odor.explained_variance_ratio_.sum() * 100
@@ -29,7 +38,7 @@ total_var = pca_odor.explained_variance_ratio_.sum() * 100
 fig = px.scatter(
     x=principalComponents_odor[:,0], 
     y=principalComponents_odor[:,1], 
-    color=odor_dataset['Sampe/Class'],
+    color=odor_dataset['Class'],
     title=f'PCA Variância total: {total_var:.2f}%'
     )
 
