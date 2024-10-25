@@ -2,11 +2,11 @@ import numpy as np
 import pandas as pd
 import os
 dataset_patch = os.path.join('..','dataset_new')
-atual_df = os.path.join(dataset_patch,'10-Perfil_Compostagem(meio).csv')
+atual_df = os.path.join(dataset_patch,'5-Perfil_Racao.csv')
 df = pd.read_csv(atual_df)
 
 # create a new column 
-df['Class'] = 'Racao'
+df['Class'] = 'Compostagem(meio)'
 
 
 #delete the unused columns
@@ -40,6 +40,6 @@ df = df.rename(columns={
 })
 
 
-new_df = os.path.join(dataset_patch,'10-Perfil_Compostagem(meio)_adjust.csv')
+new_df = os.path.join(dataset_patch,'5-Perfil_Racao_adjust.csv')
 #save as new csv
 df.to_csv(new_df, index=False)
